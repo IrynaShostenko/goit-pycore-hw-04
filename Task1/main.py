@@ -1,27 +1,35 @@
 """розробляємо функцію total_salary(path), яка аналізує цей файл 
 і повертає загальну та середню суму заробітної плати всіх розробників."""
 
-# імпортуємо функції
-from data import load_data, clean_data
-from processing import calculate_salaries
+def total_salary(path):
+    try:
+        # Відкриваємо файл з вказаним шляхом
+        with open(path, 'r', encoding='utf-8') as file:
+            total = 0
+            count = 0
 
-def main():
-    path = 'salary.txt'
-    raw_data = load_data(path)
-    
-    if raw_data is None:
-        print("Помилка при читанні файлу.")
-        return
-    
-    # очищуємо дані
-    cleaned_data = clean_data(raw_data)
-    
-    # обчислюємо загальну та середню зарплату
-    total, average = calculate_salaries(cleaned_data)
-    
-    # виводимо результати
-    print (f"Загальна сума заробітної плати: {total}, Середня заробітна плата: {average}")
+            # Читаємо кожен рядок
+            for line in file:
+                # Розділяємо рядок на прізвище та зарплату
+                name, salary = line.strip().split(',')
+                total += int(salary)  # Додаємо зарплату до загальної суми
+                count += 1  # Збільшуємо лічильник кількості розробників
 
-# перевіряємо чи
-if __name__ == '__main__':
-    main()
+            # Обчислюємо середню зарплату
+            average = total / count if count != 0 else 0
+
+            # Повертаємо загальну та середню зарплату як кортеж
+            return total, round(average, 2)
+
+    except FileNotFoundError:
+        print(f"Файл за шляхом {path} не знайдено.")
+        return None
+    except Exception as e:
+        print(f"Виникла помилка: {e}")
+        return None
+
+# Приклад виклику функції
+path_to_file = 'salary.txt'
+total, average = total_salary(path_to_file)
+if total and average:
+    print(f"Загальна сума заробітної плати: {total}, Середня заробітна плата: {average}")
