@@ -31,3 +31,4 @@ path_to_file = 'cats.txt'
 cats_info = get_cats_info(path_to_file)
 if cats_info:
     print(cats_info)
+    
