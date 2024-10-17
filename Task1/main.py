@@ -33,3 +33,4 @@ path_to_file = 'salary.txt'
 total, average = total_salary(path_to_file)
 if total and average:
     print(f"Загальна сума заробітної плати: {total}, Середня заробітна плата: {average}")
+    
