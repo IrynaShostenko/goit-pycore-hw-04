@@ -10,13 +10,13 @@ def get_cats_info(path):
             cats_info = []
             # Читаємо кожен рядок
             for line in file:
-                # Розділяємо рядок на прізвище та зарплату
+                # Розділяємо рядок на id, name, age
                 id, name, age = line.strip().split(',')
                 cats_info.append({"id" : id, "name" : name, "age" : age})
 
  
 
-            # Повертаємо загальну та середню зарплату як кортеж
+            # Повертаємо словник з ключами "id", "name", "age" для кожного кота
             return cats_info
 
     except FileNotFoundError:

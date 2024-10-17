@@ -18,7 +18,7 @@ def total_salary(path):
             # Обчислюємо середню зарплату
             average = total / count if count != 0 else 0
 
-            # Повертаємо загальну та середню зарплату як кортеж
+            # Повертаємо загальну та середню зарплату
             return total, round(average, 2)
 
     except FileNotFoundError:
